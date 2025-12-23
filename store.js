@@ -115,14 +115,29 @@ function checkVisibleProducts() {
 
 // Page load animation
 window.addEventListener('load', () => {
+    // Ensure hero content is visible
+    const heroContent = document.querySelector('.store-hero-content');
+    if (heroContent) {
+        heroContent.style.opacity = '1';
+    }
+    
     // Trigger initial animations
     setTimeout(() => {
         document.querySelectorAll('.store-title-line').forEach((line, index) => {
             setTimeout(() => {
                 line.style.opacity = '1';
                 line.style.transform = 'translateY(0)';
+                line.style.color = index === 0 ? 'var(--color-electric)' : 'var(--color-gold)';
             }, index * 200);
         });
+        
+        // Ensure manifesto is visible
+        const manifesto = document.querySelector('.store-hero-manifesto');
+        if (manifesto) {
+            setTimeout(() => {
+                manifesto.style.opacity = '1';
+            }, 1200);
+        }
         
         // Check for visible products after a short delay
         setTimeout(checkVisibleProducts, 300);
@@ -131,6 +146,25 @@ window.addEventListener('load', () => {
 
 // Also check on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', () => {
+    // Ensure hero text is visible immediately on mobile
+    const heroContent = document.querySelector('.store-hero-content');
+    const titleLines = document.querySelectorAll('.store-title-line');
+    const manifesto = document.querySelector('.store-hero-manifesto');
+    
+    if (heroContent) {
+        heroContent.style.opacity = '1';
+    }
+    
+    titleLines.forEach((line, index) => {
+        line.style.opacity = '1';
+        line.style.transform = 'translateY(0)';
+        line.style.color = index === 0 ? 'var(--color-electric)' : 'var(--color-gold)';
+    });
+    
+    if (manifesto) {
+        manifesto.style.opacity = '1';
+    }
+    
     setTimeout(checkVisibleProducts, 500);
 });
 

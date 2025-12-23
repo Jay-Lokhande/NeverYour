@@ -21,6 +21,12 @@
     animation: fadeInUp var(--transition-slow) ease-out 0.3s forwards;
 }
 
+/* Fallback: Ensure content is visible if animation doesn't trigger */
+.store-hero-content,
+.store-hero-content[style*="opacity"] {
+    opacity: 1 !important;
+}
+
 .store-hero-title {
     font-family: var(--font-serif);
     font-size: clamp(3rem, 8vw, 6rem);
@@ -37,6 +43,15 @@
     opacity: 0;
     transform: translateY(30px);
     animation: fadeInUp var(--transition-slow) ease-out forwards;
+}
+
+/* Ensure title lines are visible - fallback */
+.store-title-line {
+    color: var(--color-electric);
+}
+
+.store-title-line:nth-child(2) {
+    color: var(--color-gold);
 }
 
 .store-title-line:nth-child(1) {
@@ -532,6 +547,26 @@
 @media (max-width: 768px) {
     .store-hero {
         padding: calc(var(--spacing-xl) + 60px) var(--spacing-md) var(--spacing-lg);
+    }
+    
+    /* Ensure hero content is visible on mobile */
+    .store-hero-content {
+        opacity: 1 !important;
+    }
+    
+    .store-title-line {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        color: var(--color-electric) !important;
+    }
+    
+    .store-title-line:nth-child(2) {
+        color: var(--color-gold) !important;
+    }
+    
+    .store-hero-manifesto {
+        opacity: 1 !important;
+        color: var(--color-platinum) !important;
     }
     
     .product-reveal {
