@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Vault — Never Your</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="store.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">NEVER YOUR</a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
+            <div class="nav-links">
+                <a href="index.html#philosophy" class="nav-link">Philosophy</a>
+                <a href="index.html#meaning" class="nav-link">The Meaning</a>
+                <a href="index.html#manifesto" class="nav-link">Manifesto</a>
+                <a href="#vault" class="nav-link active">The Vault</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Store Hero -->
+    <section class="store-hero" id="vault">
+        <div class="store-hero-content">
+            <h1 class="store-hero-title">
+                <span class="store-title-line">NEVER YOUR</span>
+                <span class="store-title-line">MAKE THE GREAT OWN</span>
+            </h1>
+            <p class="store-hero-manifesto">Nothing great is given.<br>Everything great is owned.</p>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Products Section - Scroll Reveal -->
+    <section class="store-products">
+        
+        <!-- Product 1: Essential - Black Tee -->
+        <div class="product-reveal" data-product="essential">
+            <div class="product-container">
+                <div class="product-image-wrapper">
+                    <div class="product-image-placeholder essential-1">
+                        <div class="product-image-content">
+                            <span class="product-category">ESSENTIALS</span>
+                            <div class="product-visual">NY</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-title">The Foundation</h2>
+                    <p class="product-subtitle">Black Essential Tee</p>
+                    <p class="product-description">Wear the philosophy. Own the silence.</p>
+                    <div class="product-meta">
+                        <span class="product-price">3333</span>
+                        <a href="product.html?id=essential-1" class="product-cta">Own This</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 2: The Vault - Manifesto -->
+        <div class="product-reveal" data-product="vault">
+            <div class="product-container">
+                <div class="product-image-wrapper">
+                    <div class="product-image-placeholder vault-1">
+                        <div class="product-image-content">
+                            <span class="product-category">THE VAULT</span>
+                            <div class="product-visual">M</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-title">The Manifesto</h2>
+                    <p class="product-subtitle">Digital Collection</p>
+                    <p class="product-description">Ten principles. One ownership.</p>
+                    <div class="product-meta">
+                        <span class="product-price">5555</span>
+                        <a href="product.html?id=vault-1" class="product-cta">Claim Access</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 3: Artifact - Limited Release -->
+        <div class="product-reveal" data-product="artifact">
+            <div class="product-container">
+                <div class="product-image-wrapper">
+                    <div class="product-image-placeholder artifact-1">
+                        <div class="product-image-content">
+                            <span class="product-category">ARTIFACTS</span>
+                            <span class="product-number">001/100</span>
+                            <div class="product-visual">∞</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-title">The First</h2>
+                    <p class="product-subtitle">Numbered Artifact</p>
+                    <p class="product-description">One hundred exist. One is yours.</p>
+                    <div class="product-meta">
+                        <span class="product-price">11111</span>
+                        <a href="product.html?id=artifact-1" class="product-cta">Enter the Vault</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 4: Essential - Minimal Hoodie -->
+        <div class="product-reveal" data-product="essential">
+            <div class="product-container">
+                <div class="product-image-wrapper">
+                    <div class="product-image-placeholder essential-2">
+                        <div class="product-image-content">
+                            <span class="product-category">ESSENTIALS</span>
+                            <div class="product-visual">—</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-title">The Silence</h2>
+                    <p class="product-subtitle">Black Minimal Hoodie</p>
+                    <p class="product-description">Warmth without words. Presence without noise.</p>
+                    <div class="product-meta">
+                        <span class="product-price">5555</span>
+                        <a href="product.html?id=essential-2" class="product-cta">Own This</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 5: The Vault - Audio Monologue -->
+        <div class="product-reveal" data-product="vault">
+            <div class="product-container">
+                <div class="product-image-wrapper">
+                    <div class="product-image-placeholder vault-2">
+                        <div class="product-image-content">
+                            <span class="product-category">THE VAULT</span>
+                            <div class="product-visual">◉</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h2 class="product-title">The Monologue</h2>
+                    <p class="product-subtitle">Audio Collection</p>
+                    <p class="product-description">Thoughts spoken. Ownership claimed.</p>
+                    <div class="product-meta">
+                        <span class="product-price">3333</span>
+                        <a href="product.html?id=vault-2" class="product-cta">Claim Access</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Store Footer -->
+    <footer class="store-footer">
+        <div class="store-footer-content">
+            <p class="store-footer-text">The Vault waits for the right owner.</p>
+            <p class="store-footer-tagline">Not convinced. Not urgent. Just present.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="store.js"></script>
+</body>
+</html>
+

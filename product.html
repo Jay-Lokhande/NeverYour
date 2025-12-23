@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product — Never Your</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="store.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">NEVER YOUR</a>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
+            <div class="nav-links">
+                <a href="index.html#philosophy" class="nav-link">Philosophy</a>
+                <a href="index.html#meaning" class="nav-link">The Meaning</a>
+                <a href="index.html#manifesto" class="nav-link">Manifesto</a>
+                <a href="store.html" class="nav-link active">The Vault</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Product Page -->
+    <section class="product-page">
+        <div class="product-page-container">
+            
+            <!-- Product Image -->
+            <div class="product-page-image">
+                <div class="product-page-image-wrapper" id="productImage">
+                    <!-- Image will be loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Product Details -->
+            <div class="product-page-details">
+                <div class="product-page-header">
+                    <span class="product-page-category" id="productCategory">ESSENTIALS</span>
+                    <h1 class="product-page-title" id="productTitle">The Foundation</h1>
+                    <p class="product-page-subtitle" id="productSubtitle">Black Essential Tee</p>
+                </div>
+
+                <div class="product-page-price">
+                    <span class="price-amount" id="productPrice">3333</span>
+                </div>
+
+                <!-- Meaning Section -->
+                <div class="product-page-section">
+                    <h3 class="product-section-title">Meaning</h3>
+                    <p class="product-section-text" id="productMeaning">
+                        This is not clothing. This is a statement of ownership. When you wear this, you claim the philosophy. You own the silence. You become the foundation.
+                    </p>
+                </div>
+
+                <!-- Material/Format Section -->
+                <div class="product-page-section">
+                    <h3 class="product-section-title" id="materialTitle">Material</h3>
+                    <p class="product-section-text" id="productMaterial">
+                        Premium black cotton. Minimal construction. Maximum presence.
+                    </p>
+                </div>
+
+                <!-- Why It Exists Section -->
+                <div class="product-page-section">
+                    <h3 class="product-section-title">Why It Exists</h3>
+                    <p class="product-section-text" id="productWhy">
+                        Because ownership requires a vessel. Because philosophy needs form. Because you need to claim what is yours.
+                    </p>
+                </div>
+
+                <!-- Ownership Note -->
+                <div class="product-page-section ownership-note">
+                    <p class="ownership-text" id="productOwnership">
+                        When you own this, you don't just own an object. You own an idea. You own a principle. You own a piece of the movement.
+                    </p>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="product-page-cta">
+                    <button class="product-own-button" id="productCTA">
+                        <span class="button-text">Own This</span>
+                        <span class="button-line"></span>
+                    </button>
+                </div>
+
+                <!-- Back Link -->
+                <div class="product-page-back">
+                    <a href="store.html" class="back-link">← Return to The Vault</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="store-footer">
+        <div class="store-footer-content">
+            <p class="store-footer-text">Never Your © 2024</p>
+            <p class="store-footer-tagline">If you get it, you get it.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="product.js"></script>
+</body>
+</html>
+
