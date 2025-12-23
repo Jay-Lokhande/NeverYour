@@ -4,22 +4,26 @@
 // ============================================
 
 // Detect if device is touch-enabled
-const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+// Use existing isTouchDevice from script.js if available, otherwise detect
+const isStoreTouchDevice = typeof isTouchDevice !== 'undefined' 
+    ? isTouchDevice 
+    : ('ontouchstart' in window || navigator.maxTouchPoints > 0);
 
 // Product Reveal on Scroll
 const productReveals = document.querySelectorAll('.product-reveal');
-const revealOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
 
 // Make first product visible immediately
 if (productReveals.length > 0) {
     productReveals[0].classList.add('active');
-    // Force visibility
     productReveals[0].style.opacity = '1';
     productReveals[0].style.transform = 'translateY(0)';
 }
+
+// Set up Intersection Observer with better settings
+const revealOptions = {
+    threshold: 0.15,
+    rootMargin: '0px 0px -100px 0px'
+};
 
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -31,10 +35,31 @@ const revealObserver = new IntersectionObserver((entries) => {
     });
 }, revealOptions);
 
-// Observe all product reveals (observe all, first one will trigger immediately)
-productReveals.forEach((product) => {
+// Observe all product reveals
+productReveals.forEach((product, index) => {
+    // First product is already visible, but observe it anyway
     revealObserver.observe(product);
 });
+
+// Fallback: Check visibility on scroll as well
+let lastScrollTop = 0;
+window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    productReveals.forEach((product, index) => {
+        const rect = product.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // If product is in viewport, make it visible
+        if (rect.top < windowHeight * 0.8 && rect.bottom > 0) {
+            product.classList.add('active');
+            product.style.opacity = '1';
+            product.style.transform = 'translateY(0)';
+        }
+    });
+    
+    lastScrollTop = scrollTop;
+}, { passive: true });
 
 // Smooth scroll for product CTAs
 document.querySelectorAll('.product-cta').forEach(cta => {
@@ -45,7 +70,7 @@ document.querySelectorAll('.product-cta').forEach(cta => {
 });
 
 // Parallax effect for store hero (desktop only)
-if (!isTouchDevice) {
+if (!isStoreTouchDevice) {
     function parallaxStoreHero() {
         const storeHero = document.querySelector('.store-hero');
         if (!storeHero) return;
@@ -73,6 +98,21 @@ if (!isTouchDevice) {
     }, { passive: true });
 }
 
+// Initial check on page load - reveal products already in view
+function checkVisibleProducts() {
+    productReveals.forEach((product) => {
+        const rect = product.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // If product is in viewport, make it visible
+        if (rect.top < windowHeight && rect.bottom > -100) {
+            product.classList.add('active');
+            product.style.opacity = '1';
+            product.style.transform = 'translateY(0)';
+        }
+    });
+}
+
 // Page load animation
 window.addEventListener('load', () => {
     // Trigger initial animations
@@ -83,6 +123,14 @@ window.addEventListener('load', () => {
                 line.style.transform = 'translateY(0)';
             }, index * 200);
         });
+        
+        // Check for visible products after a short delay
+        setTimeout(checkVisibleProducts, 300);
     }, 100);
+});
+
+// Also check on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(checkVisibleProducts, 500);
 });
 

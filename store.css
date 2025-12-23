@@ -84,6 +84,7 @@
     transform: translateY(50px);
     transition: opacity var(--transition-slow), transform var(--transition-slow);
     visibility: visible;
+    position: relative;
 }
 
 .product-reveal.active {
@@ -93,6 +94,13 @@
 
 /* Make first product visible immediately - always show it */
 .product-reveal:first-of-type {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* Ensure products are visible when active */
+.product-reveal.active,
+.product-reveal[style*="opacity: 1"] {
     opacity: 1 !important;
     transform: translateY(0) !important;
 }
