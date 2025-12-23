@@ -3,52 +3,93 @@
 // Smooth scrolling, parallax, cursor effects
 // ============================================
 
-// Custom Cursor
+// Detect if device is touch-enabled
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+// Custom Cursor - Only on non-touch devices
 const cursor = document.querySelector('.cursor');
 const cursorFollower = document.querySelector('.cursor-follower');
 
-let mouseX = 0;
-let mouseY = 0;
-let followerX = 0;
-let followerY = 0;
+if (!isTouchDevice && cursor && cursorFollower) {
+    let mouseX = 0;
+    let mouseY = 0;
+    let followerX = 0;
+    let followerY = 0;
 
-document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    
-    cursor.style.left = mouseX + 'px';
-    cursor.style.top = mouseY + 'px';
-});
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        
+        cursor.style.left = mouseX + 'px';
+        cursor.style.top = mouseY + 'px';
+    });
 
-// Smooth cursor follower animation
-function animateCursor() {
-    followerX += (mouseX - followerX) * 0.1;
-    followerY += (mouseY - followerY) * 0.1;
-    
-    cursorFollower.style.left = followerX + 'px';
-    cursorFollower.style.top = followerY + 'px';
-    
-    requestAnimationFrame(animateCursor);
+    // Smooth cursor follower animation
+    function animateCursor() {
+        followerX += (mouseX - followerX) * 0.1;
+        followerY += (mouseY - followerY) * 0.1;
+        
+        cursorFollower.style.left = followerX + 'px';
+        cursorFollower.style.top = followerY + 'px';
+        
+        requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Cursor hover effects
+    const interactiveElements = document.querySelectorAll('a, button, .nav-link, .cta-button');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.width = '50px';
+            cursor.style.height = '50px';
+            cursorFollower.style.width = '12px';
+            cursorFollower.style.height = '12px';
+        });
+        
+        el.addEventListener('mouseleave', () => {
+            cursor.style.width = '20px';
+            cursor.style.height = '20px';
+            cursorFollower.style.width = '8px';
+            cursorFollower.style.height = '8px';
+        });
+    });
+} else {
+    // Hide cursor on touch devices
+    if (cursor) cursor.style.display = 'none';
+    if (cursorFollower) cursorFollower.style.display = 'none';
 }
-animateCursor();
 
-// Cursor hover effects
-const interactiveElements = document.querySelectorAll('a, button, .nav-link, .cta-button');
-interactiveElements.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        cursor.style.width = '50px';
-        cursor.style.height = '50px';
-        cursorFollower.style.width = '12px';
-        cursorFollower.style.height = '12px';
+
+// Mobile Menu Toggle - Define early for use in smooth scroll
+const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+if (mobileMenuToggle && navLinks) {
+    mobileMenuToggle.addEventListener('click', () => {
+        mobileMenuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
     });
     
-    el.addEventListener('mouseleave', () => {
-        cursor.style.width = '20px';
-        cursor.style.height = '20px';
-        cursorFollower.style.width = '8px';
-        cursorFollower.style.height = '8px';
+    // Close menu when clicking a link
+    const navLinkElements = navLinks.querySelectorAll('.nav-link');
+    navLinkElements.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+        });
     });
-});
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navLinks.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+            mobileMenuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+}
 
 // Smooth Scroll for Navigation Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -56,13 +97,21 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const navHeight = document.querySelector('.nav').offsetHeight;
+            const nav = document.querySelector('.nav');
+            const navHeight = nav ? nav.offsetHeight : 0;
             const targetPosition = target.offsetTop - navHeight;
             
             window.scrollTo({
                 top: targetPosition,
                 behavior: 'smooth'
             });
+            
+            // Close mobile menu if open
+            if (navLinks && navLinks.classList.contains('active')) {
+                mobileMenuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
+            }
         }
     });
 });
@@ -148,8 +197,10 @@ function updateManifestoSlide() {
     }
 }
 
-// Parallax Effect for Hero
+// Parallax Effect for Hero - Disabled on mobile for performance
 function parallaxHero() {
+    if (isTouchDevice) return; // Skip parallax on touch devices
+    
     const hero = document.querySelector('.hero');
     if (!hero) return;
     
@@ -245,19 +296,21 @@ if (symbolSvg) {
     });
 }
 
-// Add subtle parallax to meaning items
-const meaningItems = document.querySelectorAll('.meaning-item');
-window.addEventListener('scroll', () => {
-    meaningItems.forEach((item, index) => {
-        const rect = item.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        
-        if (rect.top < windowHeight && rect.bottom > 0) {
-            const offset = (windowHeight - rect.top) * 0.1;
-            item.style.transform = `translateX(${-30 + offset * 0.1}px)`;
-        }
-    });
-}, { passive: true });
+// Add subtle parallax to meaning items - Disabled on mobile
+if (!isTouchDevice) {
+    const meaningItems = document.querySelectorAll('.meaning-item');
+    window.addEventListener('scroll', () => {
+        meaningItems.forEach((item, index) => {
+            const rect = item.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            
+            if (rect.top < windowHeight && rect.bottom > 0) {
+                const offset = (windowHeight - rect.top) * 0.1;
+                item.style.transform = `translateX(${-30 + offset * 0.1}px)`;
+            }
+        });
+    }, { passive: true });
+}
 
 // Keyboard Navigation for Manifesto (optional enhancement)
 document.addEventListener('keydown', (e) => {
