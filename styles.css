@@ -153,6 +153,8 @@ body:hover .cursor {
     letter-spacing: 0.2em;
     color: var(--color-electric);
     text-transform: uppercase;
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .nav-links {
@@ -950,8 +952,21 @@ body:hover .cursor {
     }
     
     .nav-logo {
-        font-size: 1rem;
-        letter-spacing: 0.15em;
+        font-size: 0.85rem;
+        letter-spacing: 0.1em;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: clip;
+    }
+    
+    .nav-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
     
     .hero-title {
