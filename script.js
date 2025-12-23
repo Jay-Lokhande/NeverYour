@@ -263,9 +263,41 @@ if (ctaButton) {
     });
 }
 
+// Ensure hero text is visible immediately on mobile
+document.addEventListener('DOMContentLoaded', () => {
+    const heroContent = document.querySelector('.hero-content');
+    const titleLines = document.querySelectorAll('.title-line');
+    const tagline = document.querySelector('.hero-tagline');
+    const manifesto = document.querySelector('.hero-manifesto');
+    
+    if (heroContent) {
+        heroContent.style.opacity = '1';
+    }
+    
+    titleLines.forEach((line, index) => {
+        line.style.opacity = '1';
+        line.style.transform = 'translateY(0)';
+        line.style.color = index === 0 ? 'var(--color-electric)' : 'var(--color-gold)';
+    });
+    
+    if (tagline) {
+        tagline.style.opacity = '1';
+    }
+    
+    if (manifesto) {
+        manifesto.style.opacity = '1';
+    }
+});
+
 // Page Load Animation
 window.addEventListener('load', () => {
     document.body.style.opacity = '1';
+    
+    // Ensure hero content is visible immediately
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+        heroContent.style.opacity = '1';
+    }
     
     // Trigger initial animations
     setTimeout(() => {
@@ -273,8 +305,23 @@ window.addEventListener('load', () => {
             setTimeout(() => {
                 line.style.opacity = '1';
                 line.style.transform = 'translateY(0)';
+                line.style.color = index === 0 ? 'var(--color-electric)' : 'var(--color-gold)';
             }, index * 200);
         });
+        
+        // Ensure tagline and manifesto are visible
+        const tagline = document.querySelector('.hero-tagline');
+        const manifesto = document.querySelector('.hero-manifesto');
+        if (tagline) {
+            setTimeout(() => {
+                tagline.style.opacity = '1';
+            }, 1000);
+        }
+        if (manifesto) {
+            setTimeout(() => {
+                manifesto.style.opacity = '1';
+            }, 1200);
+        }
     }, 100);
 });
 

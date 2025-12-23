@@ -267,6 +267,12 @@ body:hover .cursor {
     animation: fadeInUp var(--transition-slow) ease-out 0.3s forwards;
 }
 
+/* Fallback: Ensure content is visible if animation doesn't trigger */
+.hero-content,
+.hero-content[style*="opacity"] {
+    opacity: 1 !important;
+}
+
 .hero-title {
     font-family: var(--font-serif);
     font-size: clamp(4rem, 12vw, 10rem);
@@ -287,6 +293,7 @@ body:hover .cursor {
 
 .title-line:nth-child(1) {
     animation-delay: 0.5s;
+    color: var(--color-electric);
 }
 
 .title-line:nth-child(2) {
@@ -806,21 +813,44 @@ body:hover .cursor {
         min-height: 100vh;
     }
     
-    .hero-title {
-        font-size: clamp(3rem, 15vw, 6rem);
-        margin-bottom: var(--spacing-sm);
+    /* Ensure hero content is visible on mobile */
+    .hero-content {
+        opacity: 1 !important;
+    }
+    
+    .title-line {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        color: var(--color-electric) !important;
+    }
+    
+    .title-line:nth-child(1) {
+        color: var(--color-electric) !important;
+    }
+    
+    .title-line:nth-child(2) {
+        color: var(--color-gold) !important;
     }
     
     .hero-tagline {
         font-size: clamp(0.75rem, 3vw, 1rem);
         margin-top: var(--spacing-sm);
         letter-spacing: 0.2em;
+        opacity: 1 !important;
+        color: var(--color-gold) !important;
     }
     
     .hero-manifesto {
         font-size: clamp(1rem, 4vw, 1.4rem);
         margin-top: var(--spacing-md);
         line-height: 1.6;
+        opacity: 1 !important;
+        color: var(--color-platinum) !important;
+    }
+    
+    .hero-title {
+        font-size: clamp(3rem, 15vw, 6rem);
+        margin-bottom: var(--spacing-sm);
     }
     
     .scroll-indicator {
