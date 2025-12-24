@@ -210,11 +210,13 @@ function parallaxHero() {
     
     if (scrolled < window.innerHeight) {
         if (heroContent) {
-            heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
-            heroContent.style.opacity = 1 - (scrolled / window.innerHeight) * 0.5;
+            // Reduced parallax intensity (10-20% reduction) - more restrained
+            heroContent.style.transform = `translateY(${scrolled * 0.2}px)`;
+            heroContent.style.opacity = Math.max(0, 1 - (scrolled / window.innerHeight) * 0.4);
         }
         if (heroBackground) {
-            heroBackground.style.transform = `translateY(${scrolled * 0.2}px)`;
+            // Reduced background parallax
+            heroBackground.style.transform = `translateY(${scrolled * 0.1}px)`;
         }
     }
 }
@@ -306,7 +308,8 @@ window.addEventListener('load', () => {
                 line.style.opacity = '1';
                 line.style.transform = 'translateY(0)';
                 line.style.color = index === 0 ? 'var(--color-electric)' : 'var(--color-gold)';
-            }, index * 200);
+                line.style.transition = 'opacity 1.0s cubic-bezier(0.25, 0.1, 0.25, 1), transform 1.0s cubic-bezier(0.25, 0.1, 0.25, 1)';
+            }, index * 300); // Slower delay
         });
         
         // Ensure tagline and manifesto are visible
@@ -315,12 +318,15 @@ window.addEventListener('load', () => {
         if (tagline) {
             setTimeout(() => {
                 tagline.style.opacity = '1';
-            }, 1000);
+                tagline.style.transform = 'translateY(0)';
+                tagline.style.transition = 'opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1)';
+            }, 1200); // Slower, more ceremonial
         }
         if (manifesto) {
             setTimeout(() => {
                 manifesto.style.opacity = '1';
-            }, 1200);
+                manifesto.style.transition = 'opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1)';
+            }, 1600); // Last to appear
         }
     }, 100);
 });

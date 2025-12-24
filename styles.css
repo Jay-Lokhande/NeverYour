@@ -23,9 +23,15 @@
     --spacing-lg: 4rem;
     --spacing-xl: 8rem;
     
-    --transition-slow: 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-normal: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Ultra-premium, restrained timing */
+    --transition-slow: 1.0s cubic-bezier(0.25, 0.1, 0.25, 1);
+    --transition-normal: 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+    --transition-fast: 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    --transition-ceremonial: 1.2s cubic-bezier(0.2, 0, 0.2, 1);
+    
+    /* Motion distances - restrained */
+    --motion-subtle: 4px;
+    --motion-gentle: 8px;
 }
 
 /* Reset & Base Styles */
@@ -195,12 +201,15 @@ body:hover .cursor {
 }
 
 .nav-link:hover {
-    opacity: 1;
+    opacity: 0.9;
     color: var(--color-gold);
+    transition: opacity var(--transition-fast) cubic-bezier(0.25, 0.1, 0.25, 1),
+                color var(--transition-fast) cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .nav-link:hover::after {
     width: 100%;
+    transition: width var(--transition-normal) cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 /* Mobile Menu Toggle */
@@ -256,8 +265,7 @@ body:hover .cursor {
     background: 
         radial-gradient(ellipse at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%),
         linear-gradient(180deg, var(--color-black) 0%, var(--color-midnight) 100%);
-    opacity: 0;
-    animation: fadeIn var(--transition-slow) ease-out forwards;
+    opacity: 1; /* Instant - no animation */
 }
 
 .hero-content {
@@ -402,7 +410,9 @@ body:hover .cursor {
     margin-bottom: var(--spacing-xl);
     letter-spacing: 0.05em;
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(var(--motion-gentle));
+    transition: opacity var(--transition-normal) cubic-bezier(0.25, 0.1, 0.25, 1),
+                transform var(--transition-normal) cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .meaning-content {
@@ -416,12 +426,15 @@ body:hover .cursor {
     padding: var(--spacing-lg);
     border-left: 1px solid rgba(212, 175, 55, 0.2);
     opacity: 0;
-    transform: translateX(-30px);
-    transition: border-color var(--transition-normal);
+    transform: translateY(var(--motion-gentle));
+    transition: border-color var(--transition-normal) cubic-bezier(0.25, 0.1, 0.25, 1),
+                opacity var(--transition-normal) cubic-bezier(0.25, 0.1, 0.25, 1),
+                transform var(--transition-normal) cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .meaning-item:hover {
     border-left-color: var(--color-gold);
+    transition: border-color var(--transition-normal) cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .meaning-title {
@@ -447,7 +460,9 @@ body:hover .cursor {
     padding-top: var(--spacing-xl);
     border-top: 1px solid rgba(212, 175, 55, 0.1);
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(var(--motion-gentle));
+    transition: opacity var(--transition-normal) cubic-bezier(0.25, 0.1, 0.25, 1),
+                transform var(--transition-normal) cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .paradox-text {
@@ -531,7 +546,9 @@ body:hover .cursor {
 .symbol-container {
     text-align: center;
     opacity: 0;
-    transform: scale(0.9);
+    transform: translateY(var(--motion-gentle));
+    transition: opacity var(--transition-normal) cubic-bezier(0.25, 0.1, 0.25, 1),
+                transform var(--transition-normal) cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .symbol-visual {
@@ -571,7 +588,9 @@ body:hover .cursor {
 .cta-content {
     text-align: center;
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(var(--motion-gentle));
+    transition: opacity var(--transition-normal) cubic-bezier(0.25, 0.1, 0.25, 1),
+                transform var(--transition-normal) cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .cta-title {
@@ -605,8 +624,13 @@ body:hover .cursor {
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    transition: color var(--transition-normal);
+    transition: color var(--transition-normal) cubic-bezier(0.25, 0.1, 0.25, 1),
+                opacity var(--transition-fast) cubic-bezier(0.25, 0.1, 0.25, 1);
     z-index: 1;
+}
+
+.cta-button:hover {
+    opacity: 0.95;
 }
 
 .cta-button::before {
@@ -678,7 +702,38 @@ body:hover .cursor {
     opacity: 0.7;
 }
 
-/* Animations */
+/* Ultra-premium, restrained animations */
+@keyframes fadeInCeremonial {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes revealSlow {
+    from {
+        opacity: 0;
+        transform: translateY(var(--motion-gentle));
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes revealTagline {
+    from {
+        opacity: 0;
+        transform: translateY(var(--motion-subtle));
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -691,7 +746,7 @@ body:hover .cursor {
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(var(--motion-gentle));
     }
     to {
         opacity: 1;

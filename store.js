@@ -19,18 +19,22 @@ if (productReveals.length > 0) {
     productReveals[0].style.transform = 'translateY(0)';
 }
 
-// Set up Intersection Observer with better settings
+// Set up Intersection Observer with ceremonial timing
 const revealOptions = {
     threshold: 0.15,
     rootMargin: '0px 0px -100px 0px'
 };
 
 const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            // Stagger reveals for ceremonial feel
+            setTimeout(() => {
+                entry.target.classList.add('active');
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                entry.target.style.transition = 'opacity 1.2s cubic-bezier(0.2, 0, 0.2, 1), transform 1.2s cubic-bezier(0.2, 0, 0.2, 1)';
+            }, index * 100); // Slight stagger between items
         }
     });
 }, revealOptions);
@@ -80,8 +84,9 @@ if (!isStoreTouchDevice) {
         
         if (scrolled < window.innerHeight) {
             if (heroContent) {
-                heroContent.style.transform = `translateY(${scrolled * 0.2}px)`;
-                heroContent.style.opacity = Math.max(0, 1 - (scrolled / window.innerHeight) * 0.5);
+                // Reduced parallax intensity (10-20% reduction)
+                heroContent.style.transform = `translateY(${scrolled * 0.15}px)`;
+                heroContent.style.opacity = Math.max(0, 1 - (scrolled / window.innerHeight) * 0.4);
             }
         }
     }

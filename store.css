@@ -18,7 +18,7 @@
 .store-hero-content {
     text-align: center;
     opacity: 0;
-    animation: fadeInUp var(--transition-slow) ease-out 0.3s forwards;
+    animation: fadeInCeremonial var(--transition-ceremonial) cubic-bezier(0.2, 0, 0.2, 1) 0.3s forwards;
 }
 
 /* Fallback: Ensure content is visible if animation doesn't trigger */
@@ -41,8 +41,8 @@
 .store-title-line {
     display: block;
     opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp var(--transition-slow) ease-out forwards;
+    transform: translateY(var(--motion-gentle));
+    animation: revealSlow var(--transition-ceremonial) cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
 
 /* Ensure title lines are visible - fallback */
@@ -71,7 +71,7 @@
     margin-top: var(--spacing-lg);
     line-height: 1.8;
     opacity: 0;
-    animation: fadeIn var(--transition-slow) ease-out 1.2s forwards;
+    animation: fadeInCeremonial var(--transition-normal) cubic-bezier(0.25, 0.1, 0.25, 1) 1.4s forwards;
 }
 
 /* Store Products Section */
@@ -96,8 +96,9 @@
     justify-content: center;
     padding: var(--spacing-xl) var(--spacing-lg);
     opacity: 0;
-    transform: translateY(50px);
-    transition: opacity var(--transition-slow), transform var(--transition-slow);
+    transform: translateY(var(--motion-gentle));
+    transition: opacity var(--transition-ceremonial) cubic-bezier(0.2, 0, 0.2, 1),
+                transform var(--transition-ceremonial) cubic-bezier(0.2, 0, 0.2, 1);
     visibility: visible;
     position: relative;
 }
@@ -244,12 +245,17 @@
     border: 1px solid var(--color-gold);
     position: relative;
     overflow: hidden;
-    transition: color var(--transition-normal);
+    transition: color var(--transition-normal) cubic-bezier(0.25, 0.1, 0.25, 1),
+                opacity var(--transition-fast) cubic-bezier(0.25, 0.1, 0.25, 1);
     display: inline-block;
     min-height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.product-cta:hover {
+    opacity: 0.95;
 }
 
 .product-cta::before {
@@ -415,7 +421,8 @@
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    transition: color var(--transition-normal);
+    transition: color var(--transition-normal) cubic-bezier(0.25, 0.1, 0.25, 1),
+                opacity var(--transition-fast) cubic-bezier(0.25, 0.1, 0.25, 1);
     z-index: 1;
     min-height: 60px;
     display: flex;
@@ -423,6 +430,10 @@
     align-items: center;
     justify-content: center;
     gap: var(--spacing-xs);
+}
+
+.product-own-button:hover {
+    opacity: 0.95;
 }
 
 .product-own-button::before {
